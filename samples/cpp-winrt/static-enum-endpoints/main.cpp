@@ -122,6 +122,15 @@ int main()
             std::cout << "- Purpose: Unknown" << std::endl;
         }
 
+        std::cout << std::endl << "Container Info" << std::endl;
+        auto containerInfo = endpoint.GetContainerDeviceInformation();
+        if (containerInfo)
+        {
+            auto name = containerInfo.Name();
+            std::cout << "- Container Id:   " << winrt::to_string(containerInfo.Id()) << std::endl;
+            std::cout << "- Container Name: " << winrt::to_string(containerInfo.Name()) << std::endl;
+        }
+
         // Note: Most of these std::cout calls should really be std::wcout due to the format
         // of the string data. Similarly, conversions to std::string should be std::wstring
         

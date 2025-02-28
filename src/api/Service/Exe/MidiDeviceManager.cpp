@@ -2562,6 +2562,19 @@ CMidiDeviceManager::SyncMidi1Ports(
                     true
                 );
 
+                {
+                    wchar_t wsz[256];
+                    wsprintf(wsz, L"### [%s] [%s] [%s] [%s] [%s] %d %d",
+                        friendlyName.c_str(),
+                        portInfo[flow][groupIndex].Name.c_str(),
+                        parentDeviceName.c_str(),
+                        manufacturerName.c_str(),
+                        transportSuppliedEndpointName.c_str(),
+                        flow,
+                        groupIndex
+                    );
+                    OutputDebugString(wsz);
+                }
 
                 interfaceProperties.push_back(DEVPROPERTY{ {DEVPKEY_DeviceInterface_FriendlyName, DEVPROP_STORE_SYSTEM, nullptr},
                     DEVPROP_TYPE_STRING, (ULONG)(sizeof(wchar_t) * (wcslen(friendlyName.c_str()) + 1)), (PVOID)friendlyName.c_str() });

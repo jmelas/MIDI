@@ -514,12 +514,7 @@ CMidiPort::Callback(_In_ PVOID data, _In_ UINT size, _In_ LONGLONG position, LON
                     {
                         // put us into SysEx transfer state.
                         m_IsInSysex = true;
-
-                        BYTE* bufferData = (((BYTE*)buffer->lpData) + buffer->dwBytesRecorded);
-
-                        *bufferData = *callbackData;
-                        ++bufferData;
-                        ++buffer->dwBytesRecorded;
+                        buffer->lpData[buffer->dwBytesRecorded++] = *callbackData;
                     }
                     else
                     {
@@ -592,11 +587,7 @@ CMidiPort::Callback(_In_ PVOID data, _In_ UINT size, _In_ LONGLONG position, LON
                     else if (MIDI_BYTE_IS_DATA_BYTE(*callbackData) || MIDI_BYTE_IS_SYSEX_END_STATUS(*callbackData))
                     {
                         // either the end byte or a data byte, for sysex. Either way, add it to the buffer
-                        BYTE* bufferData = (((BYTE*)buffer->lpData) + buffer->dwBytesRecorded);
-
-                        *bufferData = *callbackData;
-                        ++bufferData;
-                        ++buffer->dwBytesRecorded;
+                        buffer->lpData[buffer->dwBytesRecorded++] = *callbackData;
 
                         // the byte we received is a proper sysex end byte, so complete it
                         if (MIDI_BYTE_IS_SYSEX_END_STATUS(*callbackData))

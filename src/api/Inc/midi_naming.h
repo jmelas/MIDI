@@ -123,7 +123,7 @@ namespace WindowsMidiServicesInternal::Midi1PortNaming
             std::wstring name;
 
             // TEMPORARY code
-            name = transportSuppliedEndpointName;
+            //name = transportSuppliedEndpointName;
 
             if (name.empty())
             {
